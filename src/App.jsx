@@ -1,14 +1,15 @@
-import PokemonCard from './components/PokemonCard.jsx'
-import { useState } from 'react'
-import NavBar from './components/NavBar.jsx'
+import { useState } from 'react';
+import PokemonCard from './components/PokemonCard';
+import NavBar from './components/NavBar';
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 
 
-
 function App() {
+
+  const [pokemonIndex, setPokemonIndex] = useState(0);
   const pokemonList = [
     {
       name: "bulbasaur",
@@ -35,25 +36,18 @@ function App() {
     },
   ];
 
-  const [pokemonIndex, setPokemonIndex] = useState(0);
-  const handleNextClick = () => {
-    if (pokemonIndex < pokemonList.length - 1) {
-      setPokemonIndex(pokemonIndex + 1)
-    }
-  };
-
-  const handlePrevClick = () => {
-    if (pokemonIndex > 0) {
-      setPokemonIndex(pokemonIndex - 1)
-    }
-  };
-
+  const boutonPokemon = (index) => {
+    setPokemonIndex(index);
+  }
   return (
     <>
-      <div>
         <PokemonCard pokemon={pokemonList[pokemonIndex]} />
-        <NavBar handleNextClick={handleNextClick} handlePrevClick={handlePrevClick} />
-      </div>
+        <NavBar
+        pokemonIndex={pokemonIndex}
+        pokemonSelect={boutonPokemon}
+        setPokemonIndex={setPokemonIndex}
+        pokemonList={pokemonList}
+        />
     </>
   );
 }
